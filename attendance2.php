@@ -1,0 +1,133 @@
+<?php include('server.php') ?>
+<?php 
+
+    if (!isset($_SESSION['id'])) {
+        $_SESSION['msg'] = "You must log in first";
+        header('location: index.php');
+    }
+
+    if (isset($_GET['back'])) {
+        
+        header("location: search.php");
+    }
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>ACK St. Luke's Mokongeni, Thika</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+    
+    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <?php if (isset($_SESSION['success'])) : ?>
+                    <span>
+                        <h3>
+                            <?php 
+                                echo $_SESSION['success']; 
+                                unset($_SESSION['success']);
+                            ?>
+                        </h3>
+                    </span>
+                <?php endif ?>
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h4 class="title">Welcome to ACK St. Lukes Makongeni, Thika. </h4>
+
+                    <?php
+                            if(isset($_GET['id']) && $_GET['id'] !== ''){
+                              $p_id = $_GET['id'];
+
+                            }
+                        ?>
+                    <form method="POST" action="attendance2.php">
+                        
+                        
+                        <div style="margin-bottom: 50PX;" class="row row-space">
+                            <div class="col-2">
+                                
+                                    <input class="input--style-1" type="hidden" placeholder="" name="id" value="<?php echo($p_id); ?>" required = true>
+                                    
+                                <div class="input-group">
+                                    <input class="input--style-1" type="text" placeholder="TEMPERATURE" name="temperature" required = true>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                    <select size="6" name="service">
+                                        <option disabled="disabled" selected="selected">SERVICE</option>
+                                        <option>KISWAHILI SRVICE</option>
+                                        <option>ENGLISH SERVICE</option>
+                                        <option>YOUTH SERVICE</option>
+                                        <option>KIKUYU SERVICE</option>
+                                        <option>TEENS SERVICE</option>
+                                        <option>SUNDAY SCHOOL</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                     
+                        
+                        <div class="row row-space">
+                            <div class="col-md-7">
+                               <div class="p-t-20">
+                                    <a href="search.php" style="background-color: #fc324d; text-decoration: none;" class="btn btn--radius">Back</a>  
+                                </div> 
+                            </div>
+                            <div class="col-md-2">
+                                <div class="p-t-20">
+                                    <button class="btn btn--radius btn--green" type="submit" name="attendance2">Submit</button>  
+                                </div>
+                            </div>
+                        </div>
+                         
+                        </div>
+                            
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
