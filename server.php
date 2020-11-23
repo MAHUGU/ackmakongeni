@@ -11,8 +11,11 @@ $gender = "";
   $kin_no = "";
 $errors = array(); 
 $_SESSION['success'] = "";
-// connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'ack_st_lukes');
+// connect to the local database
+//$db = mysqli_connect('localhost', 'root', '', 'ack_st_lukes');
+
+// connect to the remote database
+$db = mysqli_connect('remotemysql.com', 'yovFvby7PA', 'yYB0XGBXBX', 'yovFvby7PA');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
