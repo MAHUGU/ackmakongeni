@@ -1,4 +1,18 @@
 <?php include('server.php') ?>
+<?php 
+
+    if (!isset($_SESSION['id']) and !isset($_SESSION['role'])) {
+        $_SESSION['msg'] = "You must log in first";
+        header('location: index.php');
+    }
+
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        unset($_SESSION['id']);
+        header("location: index.php");
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +29,7 @@
 
     <!-- add icon link -->
     <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 
+
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -37,12 +52,12 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
-                    <form method="POST" action="register.php">
+                    <form method="POST" action="register2.php">
                         <div style="color: #f54b42;" class="error success" >
                             <?php include('errors.php'); ?>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="NAME" name="name" required = true>
+                            <input class="input--style-1" type="text" placeholder="NAME" name="name" value="<?php echo $name; ?>" required = true>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
@@ -89,18 +104,17 @@
 
                         
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-md-7">
                                 <div class="p-t-20">
-                                <button class="btn btn--radius btn--green" name ="reg_user" type="submit">Submit</button>  
+                                    <a name="logout" href="search.php" style="background-color: #fc324d; text-decoration: none;" class="btn btn--radius">Back</a>  
+                                </div> 
+                            </div>
+                            <div class="col-md-2">
+                                <div class="p-t-20">
+                                <button class="btn btn--radius btn--green" name ="reg_user2" type="submit">Submit</button>  
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="p-t-20">
-                                    <p>
-                                        Already a member? <a href="index.php">Login</a>
-                                    </p>
-                                </div>
-                            </div>
+                            
                         </div>
                     </form>
                 </div>

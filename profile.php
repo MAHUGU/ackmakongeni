@@ -3,7 +3,7 @@
  ?>
  <?php 
 
-    if (!isset($_SESSION['id'])) {
+    if (!isset($_SESSION['id']) and !isset($_SESSION['role'])) {
         $_SESSION['msg'] = "You must log in first";
         header('location: index.php');
     }
@@ -20,6 +20,10 @@
 <head>
 
     <title>Members list</title>
+
+    <!-- add icon link -->
+    <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css2/vendor/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="css2/vendor/font-awesome.min.css" type="text/css" rel="stylesheet">
@@ -37,10 +41,14 @@
     <?php
         if(isset($_GET['id']) && $_GET['id'] !== ''){
           $p_id = $_GET['id'];
-          $query = "SELECT * FROM user WHERE id='$p_id'";
-          $results = mysqli_query($db, $query);
-          $row = mysqli_fetch_assoc($results);
         }
+        if(isset($_SESSION['usr_id'])){
+           $p_id =  $_SESSION['usr_id'];
+        }
+
+        $query = "SELECT * FROM user WHERE id='$p_id'";
+        $results = mysqli_query($db, $query);
+        $row = mysqli_fetch_assoc($results);
     ?>
 <div class="container emp-profile">
             <form method="post">

@@ -3,7 +3,7 @@
  ?>
  <?php 
 
-    if (!isset($_SESSION['id'])) {
+    if (!isset($_SESSION['id']) and !isset($_SESSION['role'])) {
         $_SESSION['msg'] = "You must log in first";
         header('location: index.php');
     }
@@ -20,6 +20,9 @@
 <head>
 
     <title>Members list</title>
+    <!-- add icon link -->
+    <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css2/vendor/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="css2/vendor/font-awesome.min.css" type="text/css" rel="stylesheet">
@@ -29,19 +32,8 @@
     
 </head>
 <body style="background-color: #3297a8">
-    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-    <div class="container">
-       <!-- notification message -->
-        <?php if (isset($_SESSION['success'])) : ?>
-            <div class="error success" >
-                <h3>
-                    <?php 
-                        echo $_SESSION['success']; 
-                        unset($_SESSION['success']);
-                    ?>
-                </h3>
-            </div>
-        <?php endif ?>
+    <div style="background-color: #3297a8" class="page-wrapper p-t-100 p-b-100 font-robo">
+    <div style="background-color: #3297a8" class="container">
         <div class="row">
             <div class="box clearfix">
               <div class="row row-space">
@@ -50,7 +42,7 @@
                         <h3>ACK ST LUKES MEMBERS</h3>
                         <p>MOVING TO THE HEIGHTS.</p>
                         
-                        <a class="btn btn-primary" href="register.php">Add new member</a>
+                        <a class="btn btn-primary" href="register2.php">Add new member</a>
                     </div>
                   </div>
                   <div style=" margin-top: 20px; margin-left: 60px; font-size: 12px;" class="col-md-1">
@@ -63,12 +55,12 @@
               </div>
               
                 <div class="col-md-7" style="padding-top: 25px;">
-                  <?php if (isset($_SESSION['success'])) : ?>
+                  <?php if (isset($_SESSION['msg'])) : ?>
                       <div style="font-size: 13px; color: #1ede14;" >
                           <h4>
                               <?php 
-                                  echo $_SESSION['success']; 
-                                  unset($_SESSION['success']);
+                                  echo $_SESSION['msg']; 
+                                  unset($_SESSION['msg']);
                               ?>
                           </h4>
                       </div>
@@ -76,7 +68,6 @@
                 </div>
                   
                 <?php
-                //$idd = "<script>document.write(cellValue);</script>";
 
                   $sql="select * from user";
                   $sql_row=mysqli_query($db, $sql);

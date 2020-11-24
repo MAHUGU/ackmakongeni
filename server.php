@@ -3,7 +3,7 @@ session_start();
 
 // initializing variables
 $name = "";
-$id   = "";
+//$id   = "";
 $gender = "";
   $phone_no = "";
   $residence = "";
@@ -13,7 +13,6 @@ $errors = array();
 $_SESSION['success'] = "";
 // connect to the local database
 //$db = mysqli_connect('localhost', 'root', '', 'ack_st_lukes');
-
 // connect to the remote database
 $db = mysqli_connect('remotemysql.com', 'yovFvby7PA', 'yYB0XGBXBX', 'yovFvby7PA');
 
@@ -21,7 +20,7 @@ $db = mysqli_connect('remotemysql.com', 'yovFvby7PA', 'yYB0XGBXBX', 'yovFvby7PA'
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
   $name = mysqli_real_escape_string($db, $_POST['name']);
-  $id = mysqli_real_escape_string($db, $_POST['id']);
+ // $id = mysqli_real_escape_string($db, $_POST['id']);
   $gender = mysqli_real_escape_string($db, $_POST['gender']);
   $phone_no = mysqli_real_escape_string($db, $_POST['phone_no']);
   $residence = mysqli_real_escape_string($db, $_POST['residence']);
@@ -33,7 +32,7 @@ if (isset($_POST['reg_user'])) {
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
   if (empty($name)) { array_push($errors, "Name is required"); }
-  if (empty($id)) { array_push($errors, "ID is required"); }
+//  if (empty($id)) { array_push($errors, "ID is required"); }
   if (empty($gender)) { array_push($errors, "Gender is required"); }
   if (empty($phone_no)) { array_push($errors, "Phone No is required"); }
   if (empty($residence)) { array_push($errors, "Residence is required"); }
@@ -43,21 +42,27 @@ if (isset($_POST['reg_user'])) {
   if ($password_1 != $password_2) {
 	array_push($errors, "The two passwords do not match");
   }
+  //check the last entry in the database and pich the ID
+  $user_check = "SELECT * FROM user order by id DESC LIMIT 1";
+  $result = mysqli_query($db, $user_check);
+  $usr = mysqli_fetch_assoc($result);
+  if ($usr) { // if user exists
+    $usr_id = sprintf( '%06d', $usr["id"] + 1);
+  }
+  else{
+    $usr_id = sprintf( '%06d', 1);
+  }
 
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
-  $user_check_query = "SELECT * FROM user WHERE phone_no='$phone_no' OR id='$id' LIMIT 1";
+  $user_check_query = "SELECT * FROM user WHERE id='$usr_id' LIMIT 1";
   $result = mysqli_query($db, $user_check_query);
   $user = mysqli_fetch_assoc($result);
   
   if ($user) { // if user exists
-    if ($user['phone_no'] === $phone_no) {
-      array_push($errors, "Phone No already exists");
-    }
-
-    if ($user['id'] === $id) {
+    
       array_push($errors, "ID already exists");
-    }
+
   }
 
   // Finally, register user if there are no errors in the form
@@ -65,11 +70,74 @@ if (isset($_POST['reg_user'])) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
   	$query = "INSERT INTO user (name, id, password, gender, phone_no, residence, kin, kin_no) 
-  			  VALUES('$name', '$id', '$password', '$gender', '$phone_no', '$residence', '$kin', '$kin_no')";
+  			  VALUES('$name', '$usr_id', '$password', '$gender', '$phone_no', '$residence', '$kin', '$kin_no')";
   	mysqli_query($db, $query);
-  	$_SESSION['name'] = $name;
-  	$_SESSION['success'] = "You are now registered";
+    $mesg = "You are now registered";
+  	$_SESSION['usr_id'] = $usr_id;
+  	$_SESSION['success'] = $mesg;
   	header('location: index.php');
+  }
+}
+
+//Admin register
+if (isset($_POST['reg_user2'])) {
+  // receive all input values from the form
+  $name = mysqli_real_escape_string($db, $_POST['name']);
+ // $id = mysqli_real_escape_string($db, $_POST['id']);
+  $gender = mysqli_real_escape_string($db, $_POST['gender']);
+  $phone_no = mysqli_real_escape_string($db, $_POST['phone_no']);
+  $residence = mysqli_real_escape_string($db, $_POST['residence']);
+  $kin = mysqli_real_escape_string($db, $_POST['kin']);
+  $kin_no = mysqli_real_escape_string($db, $_POST['kin_no']);
+  $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+  $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($name)) { array_push($errors, "Name is required"); }
+//  if (empty($id)) { array_push($errors, "ID is required"); }
+  if (empty($gender)) { array_push($errors, "Gender is required"); }
+  if (empty($phone_no)) { array_push($errors, "Phone No is required"); }
+  if (empty($residence)) { array_push($errors, "Residence is required"); }
+  if (empty($kin)) { array_push($errors, "Next of Kin is required"); }
+  if (empty($kin_no)) { array_push($errors, "Next of Kin No is required"); }
+  if (empty($password_1)) { array_push($errors, "Password is required"); }
+  if ($password_1 != $password_2) {
+  array_push($errors, "The two passwords do not match");
+  }
+  //check the last entry in the database and pich the ID
+  $user_check = "SELECT * FROM user order by id DESC LIMIT 1";
+  $result = mysqli_query($db, $user_check);
+  $usr = mysqli_fetch_assoc($result);
+  if ($usr) { // if user exists
+    $usr_id = sprintf( '%06d', $usr["id"] + 1);
+  }
+  else{
+    $usr_id = sprintf( '%06d', 1);
+  }
+
+  // first check the database to make sure 
+  // a user does not already exist with the same username and/or email
+  $user_check_query = "SELECT * FROM user WHERE id='$usr_id' LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+  
+  if ($user) { // if user exists
+    
+      array_push($errors, "ID already exists");
+
+  }
+
+  // Finally, register user if there are no errors in the form
+  if (count($errors) == 0) {
+    $password = md5($password_1);//encrypt the password before saving in the database
+
+    $query = "INSERT INTO user (name, id, password, gender, phone_no, residence, kin, kin_no) 
+          VALUES('$name', '$usr_id', '$password', '$gender', '$phone_no', '$residence', '$kin', '$kin_no')";
+    mysqli_query($db, $query);
+    $_SESSION['usr_id'] = $usr_id;
+    $_SESSION['success'] = "Successifully registered";
+    header('location: profile.php');
   }
 }
 
@@ -94,8 +162,10 @@ if (isset($_POST['login_user'])) {
     $row = mysqli_fetch_assoc($results);
     if (mysqli_num_rows($results) == 1) {
     	if($row['role'] == 'admin'){
+        
     		$_SESSION['id'] = $row['id'];
-		    $_SESSION['success'] = "You are now logged in";
+        $_SESSION['role'] = $row['role'];
+		    $_SESSION['msg'] = "You are now logged in";
 		    header('location: search.php');
     	}
     	else {

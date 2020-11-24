@@ -27,6 +27,9 @@
     <!-- Title Page-->
     <title>ACK St. Luke's Mokongeni, Thika</title>
 
+    <!-- add icon link -->
+    <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 
+
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -41,9 +44,9 @@
     <link href="css/main.css" rel="stylesheet" media="all">
 </head>
 
-<body>
-    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-        <div class="wrapper wrapper--w680">
+<body style="background-color: #3297a8">
+    <div style="background-color: #3297a8" class="page-wrapper p-t-100 p-b-100 font-robo">
+        <div style="background-color: #3297a8" class="wrapper wrapper--w680">
             <div class="card card-1">
                 <?php if (isset($_SESSION['success'])) : ?>
                             <span>
