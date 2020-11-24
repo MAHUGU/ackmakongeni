@@ -191,6 +191,7 @@ if (isset($_POST['attendance'])) {
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
   if (empty($temperature)) { array_push($errors, "Temperature is required"); }
+  if ($temperature < 33 or $temperature > 39) { array_push($errors, "Temperature Not Moderate!!"); }
   if (empty($service)) { array_push($errors, "Service is required"); }
   
 
@@ -199,7 +200,7 @@ if (isset($_POST['attendance'])) {
     $query = "INSERT INTO attendance (user_id, temperature, service, cr_date) 
           VALUES('$user_id', '$temperature', '$service', '$cr_date')";
     mysqli_query($db, $query);
-    $_SESSION['id'] = $id;
+    $_SESSION['service'] = $service;
     $_SESSION['success'] = "Welcome to the service";
     header('location: home.php');
   }

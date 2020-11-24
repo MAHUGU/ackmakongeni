@@ -48,7 +48,14 @@
     <div style="background-color: #3297a8" class="page-wrapper p-t-100 p-b-100 font-robo">
         <div style="background-color: #3297a8" class="wrapper wrapper--w680">
             <div class="card card-1">
-                <?php if (isset($_SESSION['success'])) : ?>
+               <div class="card-heading"></div>
+                <div class="card-body">
+                    <h4 class="title">Welcome to ACK St. Lukes Makongeni, Thika. </h4>
+                    <form method="POST" action="attendance.php">
+                        <div class="error" style="color: #f54b42;" >
+                            <?php include('errors.php'); ?>
+                        </div>
+                        <?php if (isset($_SESSION['success'])) : ?>
                             <span>
                                 <h3>
                                     <?php 
@@ -58,11 +65,6 @@
                                 </h3>
                             </span>
                         <?php endif ?>
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    <h4 class="title">Welcome to ACK St. Lukes Makongeni, Thika. </h4>
-                    <form method="POST" action="attendance.php">
-                        
                         <div style="margin-bottom: 50PX;" class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">

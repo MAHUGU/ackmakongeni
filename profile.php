@@ -3,7 +3,7 @@
  ?>
  <?php 
 
-    if (!isset($_SESSION['id']) and !isset($_SESSION['role'])) {
+    if (!isset($_SESSION['id']) or !isset($_SESSION['role'])) {
         $_SESSION['msg'] = "You must log in first";
         header('location: index.php');
     }

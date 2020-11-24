@@ -1,7 +1,7 @@
 <?php include('server.php') ?>
 <?php 
 
-    if (!isset($_SESSION['id']) and !isset($_SESSION['role'])) {
+    if (!isset($_SESSION['id']) or !isset($_SESSION['role'])) {
         $_SESSION['msg'] = "You must log in first";
         header('location: index.php');
     }
@@ -49,17 +49,7 @@
     <div style="background-color: #3297a8" class="page-wrapper p-t-100 p-b-100 font-robo">
         <div style="background-color: #3297a8" class="wrapper wrapper--w680">
             <div class="card card-1">
-                <?php if (isset($_SESSION['success'])) : ?>
-                    <span>
-                        <h3>
-                            <?php 
-                                echo $_SESSION['success']; 
-                                unset($_SESSION['success']);
-                            ?>
-                        </h3>
-                    </span>
-                <?php endif ?>
-                <div class="card-heading"></div>
+              <div class="card-heading"></div>
                 <div class="card-body">
                     <h4 class="title">Welcome to ACK St. Lukes Makongeni, Thika. </h4>
 
@@ -70,7 +60,19 @@
                             }
                         ?>
                     <form method="POST" action="attendance2.php">
-                        
+                        <div class="error" style="color: #f54b42;" >
+                            <?php include('errors.php'); ?>
+                        </div>
+                        <?php if (isset($_SESSION['success'])) : ?>
+                            <span>
+                                <h3>
+                                    <?php 
+                                        echo $_SESSION['success']; 
+                                        unset($_SESSION['success']);
+                                    ?>
+                                </h3>
+                            </span>
+                        <?php endif ?>
                         
                         <div style="margin-bottom: 50PX;" class="row row-space">
                             <div class="col-2">

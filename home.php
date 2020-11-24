@@ -48,20 +48,19 @@
 <body style="background-color: #3297a8">
     <div style="background-color: #3297a8" class="page-wrapper p-t-100 p-b-100 font-robo">
         <div style="background-color: #3297a8" class="wrapper wrapper--w680">
-            <?php if (isset($_SESSION['success'])) : ?>
-                <span>
-                    <h3>
-                        <?php 
-                            echo $_SESSION['success']; 
-                            unset($_SESSION['success']);
-                        ?>
-                    </h3>
-                </span>
-            <?php endif ?>
             <div class="card card-1">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h4 class="title">Welcome to ACK St. Lukes Makongeni, Thika. </h4>
+                    <h5 style="color: #0b07f7;" class="title">
+                        <?php if (isset($_SESSION['success']) and isset($_SESSION['service'])) : ?>
+                    
+                            <?php 
+                                echo "Welcome ". $_SESSION["name"]. " to ACK St. Lukes Makongeni, ".$_SESSION["service"]; 
+                                unset($_SESSION['success']);
+                            ?>
+                        
+                        <?php endif ?>
+                    </h5>
                     <h5 class="title">Thank you for attending this Sunday service and be blessed. </h5>
                     <p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
                 </div>
