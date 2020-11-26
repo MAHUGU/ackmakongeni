@@ -19,7 +19,7 @@
 <html lang="en">
 <head>
 
-    <title>Members list</title>
+    <title>Profile</title>
 
     <!-- add icon link -->
     <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 

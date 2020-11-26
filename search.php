@@ -42,7 +42,7 @@
                         <h3>ACK ST LUKES MEMBERS</h3>
                         <p>MOVING TO THE HEIGHTS.</p>
                         
-                        <a class="btn btn-primary" href="register2.php">Add new member</a>
+                        <a style="background-color: #00B4CC;" class="btn btn-primary" href="register2.php">Add new member</a>
                     </div>
                   </div>
                   <div style=" margin-top: 20px; margin-left: 60px; font-size: 12px;" class="col-md-1">
@@ -53,20 +53,38 @@
                     </div> 
                   </div>
               </div>
-              
-                <div class="col-md-7" style="padding-top: 25px;">
-                  <?php if (isset($_SESSION['msg'])) : ?>
-                      <div style="font-size: 13px; color: #1ede14;" >
-                          <h4>
-                              <?php 
-                                  echo $_SESSION['msg']; 
-                                  unset($_SESSION['msg']);
-                              ?>
-                          </h4>
-                      </div>
-                  <?php endif ?>
+              <?php
+                date_default_timezone_set('Africa/Nairobi');
+
+                  // Then call the date functions
+                $date = date('Y/m/d');
+              ?>
+                <div class="col-md-10" style="height: 40px; margin-bottom: 20px; margin-right: 0px; margin-left: 40px; padding-top: 5px;">
+<!--                   <div style="ma width: 100%;" class="row-space"> -->
+                  <div class="wrap">
+                   <div class="search">
+                    <div class="custom-select" style="width:300px;">
+                      <select>
+                        <option disabled="disabled" selected="selected">ID</option>
+                        <option value="2">Name</option>
+                        <option value="3">Date</option>
+                        <option value="4">Service</option>
+                      </select>
+                    </div>
+                    <input class="input-group date" type="date" id="today">
+                    <button type="submit" class="refreshButton">
+                      <i class="fa fa-refresh fa-spin"></i>
+                    </button>
+                    <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                    <button type="submit" class="searchButton">
+                      <i class="fa fa-search"></i>
+                    </button>
+                     
+                   </div>
                 </div>
-                  
+<!--               </div> -->
+                </div>
+                 
                 <?php
 
                   $sql="select * from user";
@@ -93,10 +111,7 @@
                     </tr>
                     </thead>
                     <?php
-                      date_default_timezone_set('Africa/Nairobi');
-
-                        // Then call the date functions
-                      $date = date('Y/m/d');
+                      
                       while($sql_res=@mysqli_fetch_assoc($sql_row))
 
                       {
@@ -161,52 +176,24 @@
     <script src="js2/vendor/bootstrap.min.js" type="text/javascript"></script>
     <script src="js2/vendor/jquery.sortelements.js" type="text/javascript"></script>
     <script src="js2/jquery.bdt.min.js" type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
     <script>
         $(document).ready( function () {
             $('#bootstrap-table').bdt({
-                showSearchForm: 1,
-                showEntriesPerPageField: 1
+                showSearchForm: 0,
+                showEntriesPerPageField: 0
             });
         });
 
-        var table = document.getElementById("bootstrap-table");
-        var trList = table.getElementsByTagName("tr");
-        for(var index = 0; index < trList.length; index++) {
-         (function (index){
-            trList[index].addEventListener("click", function(event) {
-            
-           var cellValue = document.getElementById("bootstrap-table").rows[(index)].cells[0].innerHTML;
-           
-            
+     
+    let today = new Date().toISOString().substr(0, 10);
+    document.querySelector("#today").value = today;
 
-            });
-        }(index));
-    }
+    // or...
 
-       /*let thetable = document.getElementById('bootstrap-table').getElementsByTagName('tbody')[3]; 
-            for (let i = 0; i < thetable.rows.length; i++)
-                {
-                    thetable.rows[i].onclick = function()
-                    {
-                        TableRowClick(this);
-                    };
-                   }                   
-    
-            function TableRowClick(therow) {
-                let msg = therow.cells[0].innerHTML;
-                alert(msg);
-            };*/
-           /* var col = 2;
-var row = 3;
+    document.querySelector("#today").valueAsDate = new Date();
 
-var cellValue;
-cellValue = document.getElementById("dataTable").rows[row].cells[col].innerHTML;
-console.log(cellValue);
-
-console.log(document.getElementById("dataTable").rows[row].cells[0].innerHTML);*/
+      
     </script>
-    <?php
-        $idd = "<script>document.writeln(cellValue);</script>";
-    ?>
 </body>
 </html>

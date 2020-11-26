@@ -11,7 +11,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>ACK St. Luke's Mokongeni, Thika</title>
+    <title>Register</title>
 
     <!-- add icon link -->
     <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 

@@ -24,7 +24,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>ACK St. Luke's Mokongeni, Thika</title>
+    <title>Attendance</title>
 
     <!-- add icon link -->
     <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 
@@ -88,7 +88,7 @@
                                     <div class="rs-select2 js-select-simple select--no-search">
                                     <select size="6" name="service">
                                         <option disabled="disabled" selected="selected">SERVICE</option>
-                                        <option>KISWAHILI SRVICE</option>
+                                        <option>KISWAHILI SERVICE</option>
                                         <option>ENGLISH SERVICE</option>
                                         <option>YOUTH SERVICE</option>
                                         <option>KIKUYU SERVICE</option>

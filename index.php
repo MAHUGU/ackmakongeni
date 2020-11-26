@@ -11,7 +11,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>ACK St. Luke's Mokongeni, Thika</title>
+    <title>Login</title>
 
     <!-- add icon link -->
     <link rel = "icon" href = "images/ack.ico" type = "image/x-icon"> 
@@ -53,20 +53,13 @@
                                 </h4>
                             </div>
                         <?php endif ?>
-                        <?php if (isset($_SESSION['usr_id'])) : ?>
-                            <div style="font-size: 13px; color: #34eb4c;" >
-                                <h4>
-                                    <?php 
-                                        echo $_SESSION['usr_id']; 
-                                        echo $_SESSION['success']; 
-                                        unset($_SESSION['usr_id']);
-                                        unset($_SESSION['success']);
-                                    ?>
-                                </h4>
-                            </div>
-                        <?php endif ?>
+                        <?php if (isset($_SESSION['usr_id'])){
+                            
+                            $M_ID = $_SESSION['usr_id']; 
+                           }             
+                        ?>
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="PHONE NO/ID" name="id" required = true>
+                            <input class="input--style-1" type="text" value="<?php echo $M_ID; ?>" placeholder="MEMBER ID" name="id" required = true>
                         </div>
                         <div class="input-group">
                             <input class="input--style-1" type="password" placeholder="PASSWORD" name="password">
