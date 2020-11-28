@@ -194,6 +194,12 @@ if (isset($_POST['attendance'])) {
   if ($temperature < 33 or $temperature > 39) { array_push($errors, "Temperature Not Moderate!!"); }
   if (empty($service)) { array_push($errors, "Service is required"); }
   
+  $query1 = "SELECT * FROM attendance WHERE user_id='$user_id' AND cr_date='$cr_date'";
+  $results = mysqli_query($db, $query1);
+  $row = mysqli_fetch_assoc($results);
+  if (mysqli_num_rows($results) > 0) {
+      array_push($errors, "Already Recorded");
+  }else{
 
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
@@ -205,7 +211,7 @@ if (isset($_POST['attendance'])) {
     header('location: home.php');
   }
 }
-
+}
 //admin entering member's details
   if (isset($_POST['attendance2'])) {
       $temperature = mysqli_real_escape_string($db, $_POST['temperature']);
@@ -218,8 +224,15 @@ if (isset($_POST['attendance'])) {
       // form validation: ensure that the form is correctly filled ...
       // by adding (array_push()) corresponding error unto $errors array
       if (empty($temperature)) { array_push($errors, "Temperature is required"); }
+      if ($temperature < 33 or $temperature > 39) { array_push($errors, "Temperature Not Moderate!!"); }
       if (empty($service)) { array_push($errors, "Service is required"); }
-      
+
+  $query1 = "SELECT * FROM attendance WHERE user_id='$user_id' AND cr_date='$cr_date'";
+  $results = mysqli_query($db, $query1);
+  $row = mysqli_fetch_assoc($results);
+  if (mysqli_num_rows($results) > 0) {
+      array_push($errors, "Already Recorded");
+  }else{     
 
       // Finally, register user if there are no errors in the form
       if (count($errors) == 0) {
@@ -230,5 +243,5 @@ if (isset($_POST['attendance'])) {
         header('location: search.php');
       }
 }
-
+}
 ?>
