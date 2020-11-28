@@ -42,7 +42,7 @@
         if(isset($_GET['id']) && $_GET['id'] !== ''){
           $p_id = $_GET['id'];
         }
-        if(isset($_SESSION['usr_id'])){
+        else if(isset($_SESSION['usr_id'])){
            $p_id =  $_SESSION['usr_id'];
         }
 
@@ -63,9 +63,7 @@
                                     <h3>
                                         <?php echo $row["name"]; ?>
                                     </h3>
-                                    <h3>
-                                        TEMPERATURE
-                                    </h3>
+                                   
                                     <p class="proile-rating">DATE : <span>
                                         <?php
                                         date_default_timezone_set('Africa/Nairobi');
@@ -84,7 +82,7 @@
                         </div>
                     </div>
                     <div style="font-size: 15px" class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <button class="profile-edit-btn" name="btnAddMore">Edit Profile</button>
                     </div>
                 </div>
                 <div class="row">

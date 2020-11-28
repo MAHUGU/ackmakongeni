@@ -40,6 +40,7 @@
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    
 
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">

@@ -59,9 +59,8 @@
                   // Then call the date functions
                 $date = date('Y/m/d');
               ?>
-                <div class="col-md-10" style="height: 40px; margin-bottom: 20px; margin-right: 0px; margin-left: 40px; padding-top: 5px;">
-<!--                   <div style="ma width: 100%;" class="row-space"> -->
-                  <div class="wrap">
+                <div class="col-md-7" style="height: 40px; margin-bottom: 20px; margin-right: 0px; margin-left: 40px; padding-top: 5px;">
+                  <!-- <div class="wrap">
                    <div class="search">
                     <div class="custom-select" style="width:300px;">
                       <select>
@@ -81,8 +80,7 @@
                     </button>
                      
                    </div>
-                </div>
-<!--               </div> -->
+                </div> -->
                 </div>
                  
                 <?php
@@ -180,8 +178,8 @@
     <script>
         $(document).ready( function () {
             $('#bootstrap-table').bdt({
-                showSearchForm: 0,
-                showEntriesPerPageField: 0
+                showSearchForm: 1,
+                showEntriesPerPageField:1
             });
         });
 

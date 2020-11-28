@@ -53,13 +53,9 @@
                                 </h4>
                             </div>
                         <?php endif ?>
-                        <?php if (isset($_SESSION['usr_id'])){
-                            
-                            $M_ID = $_SESSION['usr_id']; 
-                           }             
-                        ?>
+                        
                         <div class="input-group">
-                            <input class="input--style-1" type="text" value="<?php echo $M_ID; ?>" placeholder="MEMBER ID" name="id" required = true>
+                            <input class="input--style-1" type="text" value="<?php if (isset($_SESSION['usr_id'])){ echo $_SESSION['usr_id'];} ?>" placeholder="MEMBER ID" name="id" required = true>
                         </div>
                         <div class="input-group">
                             <input class="input--style-1" type="password" placeholder="PASSWORD" name="password">
